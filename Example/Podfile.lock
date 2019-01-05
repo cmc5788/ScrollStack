@@ -1,0 +1,23 @@
+PODS:
+  - ScrollStack (0.1.1)
+  - SnapKit (4.2.0)
+
+DEPENDENCIES:
+  - ScrollStack (from `../`)
+  - SnapKit (= 4.2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SnapKit
+
+EXTERNAL SOURCES:
+  ScrollStack:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ScrollStack: ea6453414e79790b7a8abbdc07cefacd2ebb5b89
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+
+PODFILE CHECKSUM: 1b11cde7570da91fc460ae18c2da46b031e3e44b
+
+COCOAPODS: 1.5.3

@@ -1,0 +1,6 @@
+framework module Pods_ScrollStack_Example {
+  umbrella header "Pods-ScrollStack_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
