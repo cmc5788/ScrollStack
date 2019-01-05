@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ScrollStack_Example' do
+  pod 'ScrollStack', :path => '../'
+
+  target 'ScrollStack_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
