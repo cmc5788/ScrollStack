@@ -20,6 +20,8 @@ scrollStack.pushItem(.init(UIView()))
 }
 ```
 
+Note that this library currently includes no conveniences for usage in Interface Builder, and is optimized for programmatic layouts.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
