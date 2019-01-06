@@ -155,8 +155,8 @@ open class ScrollStackView: UIView {
             self.altAxisMode = altAxisMode
             self.meta = meta
             
-            if fixedSize >= 0 && weightedSize != nil {
-                fatalError("fixedSize and weightedSize are mututally exclusive.")
+            if percentSize > 1 {
+                fatalError("percentSize > 1 not supported.")
             }
             
             if weightedSize != nil && weightedSize! < 0 {
@@ -560,17 +560,24 @@ open class ScrollStackView: UIView {
                 
                 var calcHeight: CGFloat
                 if useWeights, let weight = item.weightedSize {
-                    let normWeight: CGFloat = weight / totalWeights
-                    calcHeight = emptySpaceHeight * normWeight
-                } else {
                     if item.percentSize >= 0, item.percentSize <= 1 {
-                        calcHeight = item.percentSize * scrollHeight
+                        calcHeight = max(item.percentSize * scrollHeight, item.fixedSize, 0)
                     } else {
                         calcHeight = max(item.fixedSize, 0)
                     }
-                    if item.weightedSize != nil { containsWeights = true; calcHeight = 0 }
+                    let normWeight: CGFloat = weight / totalWeights
+                    calcHeight += emptySpaceHeight * normWeight
+                } else {
+                    if item.percentSize >= 0, item.percentSize <= 1 {
+                        calcHeight = max(item.percentSize * scrollHeight, item.fixedSize, 0)
+                    } else {
+                        calcHeight = max(item.fixedSize, 0)
+                    }
+                    if item.weightedSize != nil {
+                        containsWeights = true
+                        calcHeight = max(calcHeight, 0)
+                    }
                 }
-                
                 
                 let frameLeft: CGFloat
                 let calcWidth: CGFloat
@@ -757,15 +764,23 @@ open class ScrollStackView: UIView {
                 
                 var calcWidth: CGFloat
                 if useWeights, let weight = item.weightedSize {
-                    let normWeight: CGFloat = weight / totalWeights
-                    calcWidth = emptySpaceWidth * normWeight
-                } else {
                     if item.percentSize >= 0, item.percentSize <= 1 {
-                        calcWidth = item.percentSize * scrollWidth
+                        calcWidth = max(item.percentSize * scrollWidth, item.fixedSize, 0)
                     } else {
                         calcWidth = max(item.fixedSize, 0)
                     }
-                    if item.weightedSize != nil { containsWeights = true; calcWidth = 0 }
+                    let normWeight: CGFloat = weight / totalWeights
+                    calcWidth += emptySpaceWidth * normWeight
+                } else {
+                    if item.percentSize >= 0, item.percentSize <= 1 {
+                        calcWidth = max(item.percentSize * scrollWidth, item.fixedSize, 0)
+                    } else {
+                        calcWidth = max(item.fixedSize, 0)
+                    }
+                    if item.weightedSize != nil {
+                        containsWeights = true
+                        calcWidth = max(calcWidth, 0)
+                    }
                 }
                 
                 let frameTop: CGFloat

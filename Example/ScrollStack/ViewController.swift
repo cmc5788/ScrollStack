@@ -24,6 +24,51 @@ class ViewController: UIViewController {
 
     func setupExample() {
         
+        // First, test weighted children.
+        
+        let scrollStack = pages.addPage()
+        
+        // The first three children will size at:
+        // max(weightedSize, fixedSize, percentSize)
+        
+        scrollStack.pushItem(.init(UIView()))
+        { (item, v: UIView) in
+            v.backgroundColor = .red
+            return item
+                .fixedSize(100)
+                .percentSize(0.2)
+                .weightedSize(1)
+        }
+        
+        scrollStack.pushItem(.init(UIView()))
+        { (item, v: UIView) in
+            v.backgroundColor = .blue
+            return item
+                .fixedSize(100)
+                .percentSize(0.2)
+                .weightedSize(1)
+        }
+        
+        scrollStack.pushItem(.init(UIView()))
+        { (item, v: UIView) in
+            v.backgroundColor = .green
+            return item
+                .fixedSize(100)
+                .percentSize(0.2)
+                .weightedSize(1)
+        }
+        
+        // This one is just a fixed size to force
+        // the weighted children to compress.
+        
+        scrollStack.pushItem(.init(UIView()))
+        { (item, v: UIView) in
+            v.backgroundColor = .magenta
+            return item
+                .fixedSize(400)
+        }
+        
+        // And now for a stress test.
         // Add three horizontally scrollable pages ...
         
         for _ in 0 ... 2 {
