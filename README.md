@@ -5,6 +5,19 @@
 [![License](https://img.shields.io/cocoapods/l/ScrollStack.svg?style=flat)](https://cocoapods.org/pods/ScrollStack)
 [![Platform](https://img.shields.io/cocoapods/p/ScrollStack.svg?style=flat)](https://cocoapods.org/pods/ScrollStack)
 
+ScrollStack combines UIScrollView and some concepts from UIStackView into a single view called `ScrollStackView`. In addition, it adds the concept of weighted sizes for children. Currently the best way to get up and running with `ScrollStackView` is to check out the [Example app's `ViewController.swift` file](https://github.com/cmc5788/ScrollStack/blob/master/Example/ScrollStack/ViewController.swift). Adding a child to a `ScrollStackView` is as simple as:
+
+```swift
+scrollStack.pushItem(.init(UIView()))
+{ (item, v: UIView) in
+    v.backgroundColor = .random()
+    return item
+        .fixedSize(50)
+        .leading(16)
+        .trailing(16)
+}
+```
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
