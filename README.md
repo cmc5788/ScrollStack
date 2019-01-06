@@ -1,6 +1,6 @@
 # ScrollStack
 
-[![CI Status](https://img.shields.io/travis/cmc5788/ScrollStack.svg?style=flat)](https://travis-ci.org/cmc5788/ScrollStack)
+[![Build Status](https://travis-ci.com/cmc5788/ScrollStack.svg?branch=master)](https://travis-ci.com/cmc5788/ScrollStack)
 [![Version](https://img.shields.io/cocoapods/v/ScrollStack.svg?style=flat)](https://cocoapods.org/pods/ScrollStack)
 [![License](https://img.shields.io/cocoapods/l/ScrollStack.svg?style=flat)](https://cocoapods.org/pods/ScrollStack)
 [![Platform](https://img.shields.io/cocoapods/p/ScrollStack.svg?style=flat)](https://cocoapods.org/pods/ScrollStack)
