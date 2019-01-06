@@ -1,8 +1,8 @@
 {
   "name": "ScrollStack",
-  "version": "0.1.1",
-  "summary": "A short description of ScrollStack.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "0.1.2",
+  "summary": "A vertical & horizontal scrollable stack layout that supports weighted sizing of elements.",
+  "description": "ScrollStack is a vertical & horizontal scrollable stack layout that supports weighted sizing of elements.",
   "homepage": "https://github.com/cmc5788/ScrollStack",
   "license": {
     "type": "MIT",
@@ -13,11 +13,16 @@
   },
   "source": {
     "git": "https://github.com/cmc5788/ScrollStack.git",
-    "tag": "0.1.1"
+    "tag": "0.1.2"
   },
   "platforms": {
     "ios": "11.0"
   },
   "swift_version": "4.2",
-  "source_files": "ScrollStack/Classes/**/*"
+  "source_files": "ScrollStack/Classes/**/*",
+  "dependencies": {
+    "SnapKit": [
+      "4.2.0"
+    ]
+  }
 }

@@ -7,6 +7,8 @@
 
 import UIKit
 
+public typealias ScrollStackViewItem = ScrollStackView.ScrollStackViewItem
+
 open class ScrollStackView: UIView {
     
     class ScrollStackViewScrollView: UIScrollView {
@@ -132,15 +134,12 @@ open class ScrollStackView: UIView {
                     attribute: NSLayoutConstraint.Attribute.bottom,
                     multiplier: 1,
                     constant: 0)
-                view.addConstraints([
+                wrapper.addConstraints([
                     leadingConstraint,
                     trailingConstraint,
                     topConstraint,
                     bottomConstraint
                     ])
-//                view.snp.makeConstraints { make in
-//                    make.edges.equalToSuperview()
-//                }
                 self.view = wrapper
             } else {
                 self.view = view
@@ -337,19 +336,19 @@ open class ScrollStackView: UIView {
         return curOffset
     }
     
-    public var onScroll: ((_ amount: CGFloat, _ percent: CGFloat) -> ())? {
+    open var onScroll: ((_ amount: CGFloat, _ percent: CGFloat) -> ())? {
         didSet {
             guard scrollEnabled else { fatalError("May not set onScroll when scrollEnabled is false.") }
         }
     }
     
-    public var onEndScrolling: ((_ amount: CGFloat, _ percent: CGFloat) -> ())? {
+    open var onEndScrolling: ((_ amount: CGFloat, _ percent: CGFloat) -> ())? {
         didSet {
             guard scrollEnabled else { fatalError("May not set onEndScrolling when scrollEnabled is false.") }
         }
     }
     
-    public var customSizingPolicy: ((ScrollStackViewItem) -> CGFloat?)?
+    open var customSizingPolicy: ((ScrollStackViewItem) -> CGFloat?)?
     
     private var _items: [ScrollStackViewItem] = []
     public var items: [ScrollStackViewItem] {
@@ -444,6 +443,7 @@ open class ScrollStackView: UIView {
                 attribute: NSLayoutConstraint.Attribute.width,
                 multiplier: 1,
                 constant: 0)
+            widthConstraint.priority = .init(999)
             let leftConstraint = NSLayoutConstraint(
                 item: widthSelfSizer,
                 attribute: NSLayoutConstraint.Attribute.left,
@@ -452,6 +452,7 @@ open class ScrollStackView: UIView {
                 attribute: NSLayoutConstraint.Attribute.left,
                 multiplier: 1,
                 constant: 0)
+            leftConstraint.priority = .init(999)
             let rightConstraint = NSLayoutConstraint(
                 item: widthSelfSizer,
                 attribute: NSLayoutConstraint.Attribute.right,
@@ -460,15 +461,12 @@ open class ScrollStackView: UIView {
                 attribute: NSLayoutConstraint.Attribute.right,
                 multiplier: 1,
                 constant: 0)
-            widthSelfSizer.addConstraints([
+            rightConstraint.priority = .init(999)
+            self.addConstraints([
                 widthConstraint,
                 leftConstraint,
                 rightConstraint
                 ])
-//            widthSelfSizer.snp.makeConstraints { make in
-//                make.width.equalTo(self.content)
-//                make.left.right.equalToSuperview()
-//            }
         }
         if makeHeightSelfSizer {
             self.addSubview(heightSelfSizer)
@@ -481,6 +479,7 @@ open class ScrollStackView: UIView {
                 attribute: NSLayoutConstraint.Attribute.height,
                 multiplier: 1,
                 constant: 0)
+            heightConstraint.priority = .init(999)
             let topConstraint = NSLayoutConstraint(
                 item: heightSelfSizer,
                 attribute: NSLayoutConstraint.Attribute.top,
@@ -489,6 +488,7 @@ open class ScrollStackView: UIView {
                 attribute: NSLayoutConstraint.Attribute.top,
                 multiplier: 1,
                 constant: 0)
+            topConstraint.priority = .init(999)
             let bottomConstraint = NSLayoutConstraint(
                 item: heightSelfSizer,
                 attribute: NSLayoutConstraint.Attribute.bottom,
@@ -497,15 +497,12 @@ open class ScrollStackView: UIView {
                 attribute: NSLayoutConstraint.Attribute.bottom,
                 multiplier: 1,
                 constant: 0)
-            heightSelfSizer.addConstraints([
+            bottomConstraint.priority = .init(999)
+            self.addConstraints([
                 heightConstraint,
                 topConstraint,
                 bottomConstraint
                 ])
-//            heightSelfSizer.snp.makeConstraints { make in
-//                make.height.equalTo(self.content)
-//                make.top.bottom.equalToSuperview()
-//            }
         }
     }
     
@@ -626,12 +623,15 @@ open class ScrollStackView: UIView {
                         calcHeight = cachedFitHeights[item] ??
                             max(item.view.frame.height, item.view.bounds.height)
                     } else if item.view is ScrollStackView {
-                        calcHeight = cachedFitHeights[item] ??
-                            max(item.view.frame.height, item.view.bounds.height)
+                        calcHeight = cachedFitHeights[item] ?? max(item.view
+                            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+                            .height, item.view.frame.height, item.view.bounds.height,
+                                     item.view.intrinsicContentSize.height)
                     } else {
                         calcHeight = cachedFitHeights[item] ?? max(item.view
                             .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-                            .height, item.view.frame.height, item.view.bounds.height)
+                            .height, item.view.frame.height, item.view.bounds.height,
+                            item.view.intrinsicContentSize.height)
                     }
                     cachedFitHeights[item] = calcHeight
                     
@@ -819,12 +819,15 @@ open class ScrollStackView: UIView {
                         calcWidth = cachedFitWidths[item] ??
                             max(item.view.frame.width, item.view.bounds.width)
                     } else if item.view is ScrollStackView {
-                        calcWidth = cachedFitWidths[item] ??
-                            max(item.view.frame.width, item.view.bounds.width)
+                        calcWidth = cachedFitWidths[item] ?? max(item.view
+                            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+                            .width, item.view.frame.width, item.view.bounds.width,
+                                    item.view.intrinsicContentSize.width)
                     } else {
                         calcWidth = cachedFitWidths[item] ?? max(item.view
                             .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-                            .width, item.view.frame.width, item.view.bounds.width)
+                            .width, item.view.frame.width, item.view.bounds.width,
+                                    item.view.intrinsicContentSize.width)
                     }
                     cachedFitWidths[item] = calcWidth
                     

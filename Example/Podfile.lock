@@ -1,5 +1,6 @@
 PODS:
-  - ScrollStack (0.1.1)
+  - ScrollStack (0.1.2):
+    - SnapKit (= 4.2.0)
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
@@ -15,7 +16,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ScrollStack: ea6453414e79790b7a8abbdc07cefacd2ebb5b89
+  ScrollStack: 25c2ec54afbb04808182e231c165a7f001d4ebf2
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
 PODFILE CHECKSUM: 1b11cde7570da91fc460ae18c2da46b031e3e44b
