@@ -8,6 +8,8 @@
 ScrollStack combines UIScrollView and some concepts from UIStackView into a single view called `ScrollStackView`. In addition, it adds the concept of weighted sizes for children. Currently the best way to get up and running with `ScrollStackView` is to check out the [Example app's `ViewController.swift` file](https://github.com/cmc5788/ScrollStack/blob/master/Example/ScrollStack/ViewController.swift). Adding a child to a `ScrollStackView` is as simple as:
 
 ```swift
+let scrollStack = ScrollStackView()
+// ...
 scrollStack.pushItem(.init(UIView()))
 { (item, v: UIView) in
     v.backgroundColor = .random()
