@@ -798,6 +798,14 @@ open class ScrollStackView: UIView {
                     altAxisFloat = float
                     break
                 case .fit(let x, let float):
+                    if item.view is UILabel {
+                        item.view.frame = CGRect(
+                            x: contentWidth + item.left,
+                            y: 0,
+                            width: calcWidth,
+                            height: 0)
+                        item.view.sizeToFit()
+                    }
                     calcHeight = x ?? max(item.view.frame.height, item.view.bounds.height)
                     altAxisFloat = float
                     break
