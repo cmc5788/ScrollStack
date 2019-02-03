@@ -37,6 +37,7 @@ open class ScrollStackView: UIView {
             }
             set {
                 guard _allowSetDelegate else {
+                    if delegate == nil { super.delegate = nil; return }
                     fatalError("setting custom UIScrollViewDelegate not currently allowed.")
                 }
                 super.delegate = newValue
