@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ScrollStack'
-  s.version          = '0.1.6'
+  s.version          = '0.1.7'
   s.summary          = 'A vertical & horizontal scrollable stack layout that supports weighted sizing of elements.'
 
   s.description      = <<-DESC

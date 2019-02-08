@@ -511,6 +511,17 @@ open class ScrollStackView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    open override var intrinsicContentSize: CGSize {
+        return content.bounds.size
+    }
+    
+    private var contentBoundsSize: CGSize? {
+        didSet {
+            if contentBoundsSize == oldValue { return }
+            invalidateIntrinsicContentSize()
+        }
+    }
+    
     open override func layoutSubviews() {
         
         super.layoutSubviews()
@@ -520,6 +531,8 @@ open class ScrollStackView: UIView {
         } else {
             layoutSubviewsHorizontally()
         }
+        
+        self.contentBoundsSize = content.bounds.size
     }
     
     open func layoutSubviewsVertically() {
