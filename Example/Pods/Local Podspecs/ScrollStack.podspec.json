@@ -1,6 +1,6 @@
 {
   "name": "ScrollStack",
-  "version": "0.1.4",
+  "version": "0.1.8",
   "summary": "A vertical & horizontal scrollable stack layout that supports weighted sizing of elements.",
   "description": "ScrollStack is a vertical & horizontal scrollable stack layout that supports weighted sizing of elements.",
   "homepage": "https://github.com/cmc5788/ScrollStack",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/cmc5788/ScrollStack.git",
-    "tag": "0.1.4"
+    "tag": "0.1.8"
   },
   "platforms": {
     "ios": "11.0"

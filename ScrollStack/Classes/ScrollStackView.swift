@@ -608,7 +608,9 @@ open class ScrollStackView: UIView {
                     altAxisFloat = float
                     break
                 case .fit(let x, let float):
-                    calcWidth = x ?? max(item.view.frame.width, item.view.bounds.width)
+                    calcWidth = x ?? max(item.view.frame.width,
+                                         item.view.bounds.width,
+                                         item.view.intrinsicContentSize.width)
                     altAxisFloat = float
                     break
                 }
@@ -820,7 +822,9 @@ open class ScrollStackView: UIView {
                             height: 0)
                         item.view.sizeToFit()
                     }
-                    calcHeight = x ?? max(item.view.frame.height, item.view.bounds.height)
+                    calcHeight = x ?? max(item.view.frame.height,
+                                          item.view.bounds.height,
+                                          item.view.intrinsicContentSize.height)
                     altAxisFloat = float
                     break
                 }
